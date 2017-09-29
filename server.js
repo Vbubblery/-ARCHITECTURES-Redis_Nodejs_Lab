@@ -11,9 +11,15 @@ var routes = require('./app/routes');
 
 //ioredis config
 var Redis = require ('ioredis');
-var redis = new Redis(6379, '188.166.156.96');
-var redis_sub = new Redis(6379, '188.166.156.96');
-var redis_pub = new Redis(6379, '188.166.156.96');
+var config = {
+  port: 23059,          // Redis port 
+  host: 'ec2-34-251-172-53.eu-west-1.compute.amazonaws.com',   // Redis host 
+  family: 4,           // 4 (IPv4) or 6 (IPv6) 
+  password: 'pf12010c4b34929372f6290f9e90b23091d3e36625b467558b97452ee84c47df0',
+}
+var redis = new Redis(config);
+var redis_sub = new Redis(config);
+var redis_pub = new Redis(config);
 
 var app = express();
 var server = require('http').createServer(app);
