@@ -11,9 +11,9 @@ var routes = require('./app/routes');
 
 //ioredis config
 var Redis = require ('ioredis');
-var redis = new Redis();
-var redis_sub = new Redis();
-var redis_pub = new Redis();
+var redis = new Redis(6379, '188.166.156.96');
+var redis_sub = new Redis(6379, '188.166.156.96');
+var redis_pub = new Redis(6379, '188.166.156.96');
 
 var app = express();
 var server = require('http').createServer(app);
