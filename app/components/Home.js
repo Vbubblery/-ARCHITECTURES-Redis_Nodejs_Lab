@@ -38,7 +38,7 @@ class Home extends React.Component {
            <label className="col-sm-2 control-label">Book Name</label> 
            <div className="col-sm-10"> 
            
-            <input type="text" className="form-control" value={this.state.name} onChange={action.updateName} placeholder="Name"  required="required" /> 
+            <input type="text" className="form-control" value={this.state.name} onChange={action.updateName} placeholder="Name"/> 
            </div> 
           </div> 
           <div className="form-group"> 
