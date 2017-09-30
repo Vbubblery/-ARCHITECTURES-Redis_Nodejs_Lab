@@ -33,8 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.route('/redis/publish').post(async(req,res,next)=>{
+   if(redus.exists(req.body.name)) res.status(500).end();
+   else{
    await redis.pipeline().hmset(req.body.name,req.body).expire(req.body.name,10).publish('news',req.body.name).exec((err, results)=>{});
    res.status(200).end();
+   }
 });
 
 app.use(function(req, res) {
