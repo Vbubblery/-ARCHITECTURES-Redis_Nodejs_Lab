@@ -32,9 +32,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.route('/redis/publish').post(async(req,res,next)=>{
-   await redis.pipeline().hmset(req.body.name,req.body).expire(req.body.name,10).publish('news',req.body.name).exec((err, results)=>{});
-   res.status(200).end();
+app.route('/redis/publish').post((req,res,next)=>{
+   redis.exists(req.body.name).then(async result=>{
+     if result==0 res.status(500).end();
+     else {
+      await redis.pipeline().hmset(req.body.name,req.body).expire(req.body.name,10).publish('news',req.body.name).exec((err, results)=>{});
+      res.status(200).end();
+     }                                             
+   });
 });
 
 app.use(function(req, res) {
