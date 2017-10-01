@@ -23,7 +23,7 @@ class Home extends React.Component {
   }
 
    handleSubmit(event) {
-     if(this.state.name){
+     if(this.state.name!=''){
         var data = {
         name: this.state.name,
         category:this.state.category,
