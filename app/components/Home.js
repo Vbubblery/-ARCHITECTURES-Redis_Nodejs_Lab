@@ -23,12 +23,16 @@ class Home extends React.Component {
   }
 
    handleSubmit(event) {
-     var data = {
-       name: this.state.name,
-       category:this.state.category,
-       price:this.state.price
-     };
-     action.sendToServer(data);
+     if(this.state.name){
+        var data = {
+        name: this.state.name,
+        category:this.state.category,
+        price:this.state.price
+        };
+        action.sendToServer(data);
+     }else{
+       toastr.error("Plz fill Name!");
+     }
    }
   render() {
     return (
