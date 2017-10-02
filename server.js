@@ -34,6 +34,7 @@ app.use(cors());
 
 app.route('/redis/publish').post((req,res,next)=>{
    redis.exists(req.body.name).then(async result=>{
+     if(req.body.name=='') res.status(500).end();
      if (!result==0) res.status(500).end();
      else {
       await redis.pipeline().hmset(req.body.name,req.body).expire(req.body.name,10).publish('news',req.body.name).exec((err, results)=>{});
